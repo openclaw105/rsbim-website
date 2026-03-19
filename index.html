@@ -2,19 +2,18 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>RSBIM智能监测平台 - 唐山市神州科贸有限公司</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-:root{--primary:#2d7ff9;--cyber-blue:#00d4ff;--cyber-purple:#8b5cf6;--secondary:#00c48c;--warning:#ffb020;--danger:#ff4d4f;--bg-dark:#0a0e17;--bg-card:#121a2b;--bg-card-hover:#1a2540;--bg-sidebar:#0d1220;--border-color:rgba(255,255,255,0.08);--text-primary:#ffffff;--text-secondary:#8b9dc3;--text-muted:#5a6a8a;--success:#00c48c;--grid-line:rgba(100,116,139,0.1)}
+:root{--primary:#2d7ff9;--cyber-blue:#00d4ff;--cyber-purple:#8b5cf6;--secondary:#00c48c;--warning:#ffb020;--danger:#ff4d4f;--bg-dark:#0a0e17;--bg-card:#121a2b;--bg-sidebar:#0d1220;--border-color:rgba(255,255,255,0.08);--text-primary:#fff;--text-secondary:#8b9dc3;--text-muted:#5a6a8a;--success:#00c48c}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;position:relative;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(45,127,249,0.12)0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(139,92,246,0.08)0%,transparent 50%);pointer-events:none;z-index:-1}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;opacity:0.4;pointer-events:none;z-index:-1}
-.top-nav{position:fixed;top:0;left:0;right:0;height:64px;background:rgba(13,18,32,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:2000}
+.top-nav{position:fixed;top:0;left:0;right:0;height:64px;background:rgba(13,18,32,0.95);border-bottom:1px solid var(--border-color);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:2000}
 .logo{display:flex;align-items:center;gap:14px}
-.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--cyber-purple));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--cyber-purple));border-radius:12px;display:flex;align-items:center;justify-content:center}
 .logo-text h1{font-size:18px;font-weight:700}
 .logo-tag{font-size:11px;color:var(--text-muted)}
 .nav-tabs{display:flex;gap:4px}
@@ -24,250 +23,230 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(v
 .nav-stats{display:flex;gap:28px;padding-right:24px;border-right:1px solid var(--border-color)}
 .nav-stat{text-align:center}
 .nav-stat-value{font-size:18px;font-weight:700}
-.nav-stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase}
-.status-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(0,196,140,0.15);color:var(--success)}
+.nav-stat-label{font-size:11px;color:var(--text-muted)}
+.status-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;font-size:13px;background:rgba(0,196,140,0.15);color:var(--success)}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
-.sidebar{position:fixed;left:0;top:64px;width:240px;height:calc(100vh-64px);background:var(--bg-sidebar);border-right:1px solid var(--border-color);padding:20px 0;z-index:1000;overflow-y:auto}
+.sidebar{position:fixed;left:0;top:64px;width:240px;height:calc(100vh-64px);background:var(--bg-sidebar);border-right:1px solid var(--border-color);padding:20px 0;z-index:1000}
 .section-title{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 20px;margin-bottom:12px}
-.menu-items{display:flex;flex-direction:column;gap:2px;padding:0 12px}
 .menu-item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:8px;color:var(--text-secondary);font-size:14px;cursor:pointer}
-.menu-item:hover,.menu-item.active{background:rgba(45,127,249,0.2);color:var(--primary)}
-.main-content{margin-left:240px;margin-top:64px;padding:24px;min-height:calc(100vh-64px)}
+.menu-item:hover,.menu-item.active{background:rgba(45,127,249,0.2)}
+.main-content{margin-left:240px;margin-top:64px;padding:24px}
 .page-header{margin-bottom:24px}
 .page-title{font-size:26px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:12px}
 .page-title i{color:var(--primary)}
-.page-subtitle{color:var(--text-secondary);font-size:15px}
+.page-subtitle{color:var(--text-secondary)}
 .dashboard-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
 .col-3{grid-column:span 3}
 .col-4{grid-column:span 4}
 .col-6{grid-column:span 6}
-.col-8{grid-column:span 8}
 .col-12{grid-column:span 12}
-.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:20px;transition:all 0.3s}
-.card:hover{background:var(--bg-card-hover);transform:translateY(-2px)}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:20px}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-color)}
 .card-title{font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px}
 .card-title i{color:var(--primary)}
-.chart-container{height:260px;position:relative;margin-top:10px}
+.chart-container{height:280px;position:relative;margin-top:10px}
 .stat-card{display:flex;align-items:center;gap:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px}
 .stat-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
 .stat-value{font-size:26px;font-weight:700}
 .stat-label{font-size:12px;color:var(--text-secondary)}
-.gauge-container{display:flex;justify-content:space-around;margin:15px 0}
-.gauge{position:relative;width:100px;height:100px}
-.gauge-bg{position:absolute;inset:0;border-radius:50%}
-.gauge-fill{position:absolute;inset:8px;border-radius:50%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;flex-direction:column}
-.gauge-value{font-size:18px;font-weight:700}
-.gauge-label{font-size:10px;color:var(--text-muted)}
-.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
-.metric-item{padding:12px;background:rgba(255,255,255,0.03);border-radius:10px}
-.metric-name{font-size:12px;color:var(--text-secondary);margin-bottom:6px}
-.metric-value{font-size:20px;font-weight:700}
-.metric-sub{font-size:11px;color:var(--text-muted)}
-.alert-panel{background:linear-gradient(135deg,rgba(255,77,79,0.15),rgba(255,143,0,0.08));border:1px solid rgba(255,77,79,0.4);border-radius:12px;padding:16px;margin-top:16px;animation:alertPulse 3s infinite}
-.alert-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.metric-value{font-size:36px;font-weight:700;text-align:center;margin:20px 0}
+.alert-panel{background:linear-gradient(135deg,rgba(255,77,79,0.15),rgba(255,143,0,0.08));border:1px solid rgba(255,77,79,0.4);border-radius:12px;padding:16px;margin-top:16px}
+.alert-header{display:flex;align-items:center;gap:10px}
 .alert-icon{font-size:18px;color:var(--danger)}
 .alert-title{font-size:15px;font-weight:700;color:var(--danger)}
-.heat-map{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;height:180px;margin-top:10px}
-.heat-cell{border-radius:4px;transition:all 0.3s}
-.heat-cell:hover{transform:scale(1.15);z-index:10}
-.cloud-map{position:relative;height:180px;margin-top:10px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0a1628,#0d1f35)}
-.cloud-point{position:absolute;border-radius:50%;filter:blur(25px);animation:cloudFloat 4s ease-in-out infinite}
-.sensor-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:10px}
-.sensor{width:100%;aspect-ratio:1;border-radius:3px;background:rgba(0,196,140,0.4);transition:all 0.3s}
+.heat-map{display:grid;grid-template-columns:repeat(16,1fr);gap:3px;height:240px;margin-top:10px}
+.heat-cell{border-radius:4px}
+.cloud-3d{position:relative;height:250px;margin-top:10px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#0a1628,#0d1f35)}
+.cloud-point{position:absolute;border-radius:50%;filter:blur(3px);animation:float3d 6s ease-in-out infinite}
+@keyframes float3d{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.pseudo-scene{position:relative;height:250px;margin-top:10px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a2744,#0d1f35,#152238)}
+.mountain-peak{position:absolute;bottom:0;border-radius:50% 50% 0 0;background:linear-gradient(180deg,rgba(45,127,249,0.3),rgba(45,127,249,0.05))}
+.radar-full{height:300px}
+.sensor-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:3px;margin-top:10px}
+.sensor{width:100%;aspect-ratio:1;border-radius:3px;background:rgba(0,196,140,0.4)}
 .sensor.warning{background:rgba(255,176,32,0.5)}
 .sensor.danger{background:rgba(255,77,79,0.5)}
-.sensor:hover{transform:scale(1.3)}
-.data-table{width:100%;border-collapse:collapse;margin-top:10px}
-.data-table th,.data-table td{padding:12px;text-align:left;border-bottom:1px solid var(--border-color);font-size:13px}
-.data-table th{color:var(--text-muted);font-weight:500}
-.data-table tr:hover td{background:rgba(45,127,249,0.1)}
-.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;border-radius:4px}
+.wave-container{height:120px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(0,212,255,0.1),transparent);border-radius:12px;margin-top:10px}
+.wave{position:absolute;width:200%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 50px,rgba(0,212,255,0.3) 50px,rgba(0,212,255,0.3) 100px);animation:waveMove 10s linear infinite}
+@keyframes waveMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .status-normal{color:var(--success)}
 .status-warning{color:var(--warning)}
 .status-danger{color:var(--danger)}
-.cloud-3d{position:relative;height:200px;margin:15px 0;border-radius:12px;background:linear-gradient(180deg,#0a1628 0%,#0d1f35 50%,#0f2942 100%);overflow:hidden;perspective:800px}
-.cloud-3d .cloud-point{position:absolute;border-radius:50%;filter:blur(8px);animation:cloudFloat 4s ease-in-out infinite}
-.cloud-3d .cloud-point:nth-child(odd){animation-duration:5s}
-.cloud-3d .cloud-point:nth-child(3n){animation-duration:6s}
-@keyframes cloudFloat{0%,100%{transform:translateY(0) translateZ(0);opacity:0.6}50%{transform:translateY(-15px) translateZ(20px);opacity:1}}
-.cloud-3d .cloud-point::after{content:'';position:absolute;inset:-5px;border-radius:50%;background:inherit;filter:blur(15px);opacity:0.5;z-index:-1}
-.pseudo-scene{position:relative;height:220px;margin:15px 0;border-radius:12px;background:linear-gradient(180deg,#0a0e17 0%,#1a2a3f 60%,#2d4a5e 100%);overflow:hidden;perspective:1000px}
-.pseudo-scene .mountain-peak{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:80px solid transparent;border-right:80px solid transparent;border-bottom:120px solid rgba(45,127,249,0.3)}
-.pseudo-scene .mountain-peak::before{content:'';position:absolute;bottom:-120px;left:-60px;width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-bottom:90px solid rgba(0,212,255,0.25)}
-.pseudo-scene .mountain-peak::after{content:'';position:absolute;bottom:-90px;left:-40px;width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:60px solid rgba(139,92,246,0.2)}
-.pseudo-scene .terrain-line{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.5))}
-.pseudo-scene .cloud-layer{position:absolute;inset:0;animation:sceneFloat 20s linear infinite}
-@keyframes sceneFloat{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.pseudo-scene .cloud-particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.1);filter:blur(20px)}
-.wave-container{position:relative;height:120px;margin:15px 0;border-radius:12px;background:linear-gradient(135deg,#0a1628,#0d1f35);overflow:hidden}
-.wave{position:absolute;bottom:0;left:0;width:200%;height:100px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),transparent);animation:waveMove 3s ease-in-out infinite}
-.wave:nth-child(1){bottom:20px;height:60px;animation-delay:0s;opacity:0.8}
-.wave:nth-child(2){bottom:10px;height:80px;animation-delay:-1s;opacity:0.5}
-.wave:nth-child(3){bottom:30px;height:40px;animation-delay:-2s;opacity:0.6}
-@keyframes waveMove{0%,100%{transform:translateX(0)}50%{transform:translateX(-25%)}}
-.wave::before{content:'';position:absolute;top:-50px;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(45,127,249,0.2),transparent);border-radius:50%}
-.radar-container{height:280px;margin-top:10px}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-@keyframes alertPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,79,0.3)}50%{box-shadow:0 0 0 8px rgba(255,77,79,0)}}
+.ring-indicator{width:80px;height:80px;border-radius:50%;border:4px solid rgba(255,255,255,0.1);position:relative;margin:0 auto 10px}
+.ring-fill{position:absolute;inset:0;border-radius:50%;border:4px solid transparent;border-top-color:var(--primary);transform:rotate(0deg)}
+.ring-value{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.monitor-card{text-align:center;padding:20px;background:rgba(255,255,255,0.02);border-radius:12px}
+.monitor-card .card-icon{font-size:28px;margin-bottom:12px}
+.monitor-card .ring-indicator{width:70px;height:70px;margin:0 auto 12px}
+.monitor-card .metric-big{font-size:28px;font-weight:700;margin-bottom:4px}
+.monitor-card .metric-small{font-size:12px;color:var(--text-secondary)}
 @media(max-width:1400px){.col-3{grid-column:span 6}.col-4{grid-column:span 6}}
-@media(max-width:900px){.col-3,.col-4,.col-6,.col-8{grid-column:span 12}.sidebar{display:none}.main-content{margin-left:0}}
+@media(max-width:900px){.col-3,.col-4,.col-6{grid-column:span 12}.sidebar{display:none}.main-content{margin-left:0}}
 </style>
 </head>
 <body>
 <div class="top-nav">
 <div class="logo"><div class="logo-icon"><i class="fas fa-satellite-dish"></i></div><div class="logo-text"><h1>RSBIM智能监测平台</h1><div class="logo-tag">唐山市神州科贸有限公司</div></div></div>
-<div class="nav-tabs">
-<a href="#" class="nav-tab active" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i> 综合监测</a>
-<a href="#" class="nav-tab" onclick="showPage('slope')"><i class="fas fa-mountain"></i> 边坡监测</a>
-<a href="#" class="nav-tab" onclick="showPage('support')"><i class="fas fa-bolt"></i> 支护监测</a>
-<a href="#" class="nav-tab" onclick="showPage('gas')"><i class="fas fa-wind"></i> 气体监测</a>
-<a href="#" class="nav-tab" onclick="showPage('fire')"><i class="fas fa-fire"></i> 火灾预警</a>
-<a href="#" class="nav-tab" onclick="showPage('analysis')"><i class="fas fa-chart-bar"></i> 数据分析</a>
-</div>
-<div class="nav-right">
-<div class="nav-stats">
-<div class="nav-stat"><div class="nav-stat-value" style="color:var(--secondary)">247</div><div class="nav-stat-label">在线传感器</div></div>
-<div class="nav-stat"><div class="nav-stat-value" style="color:var(--primary)">12</div><div class="nav-stat-label">监测项目</div></div>
-<div class="nav-stat"><div class="nav-stat-value" style="color:var(--warning)">2</div><div class="nav-stat-label">预警次数</div></div>
-</div>
-<div class="status-badge"><span class="status-dot"></span> 系统运行正常</div>
-</div>
+<div class="nav-tabs"><a class="nav-tab active" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i> 综合监测</a><a class="nav-tab" onclick="showPage('slope')"><i class="fas fa-mountain"></i> 边坡监测</a><a class="nav-tab" onclick="showPage('support')"><i class="fas fa-bolt"></i> 支护监测</a><a class="nav-tab" onclick="showPage('gas')"><i class="fas fa-wind"></i> 气体监测</a><a class="nav-tab" onclick="showPage('fire')"><i class="fas fa-fire"></i> 火灾预警</a><a class="nav-tab" onclick="showPage('analysis')"><i class="fas fa-chart-pie"></i> 数据分析</a></div>
+<div class="nav-right"><div class="nav-stats"><div class="nav-stat"><div class="nav-stat-value" style="color:var(--secondary)">247</div><div class="nav-stat-label">在线传感器</div></div><div class="nav-stat"><div class="nav-stat-value" style="color:var(--primary)">12</div><div class="nav-stat-label">监测项目</div></div><div class="nav-stat"><div class="nav-stat-value" style="color:var(--warning)">2</div><div class="nav-stat-label">预警次数</div></div></div><div class="status-badge"><span class="status-dot"></span> 系统运行正常</div></div>
 </div>
 <div class="sidebar">
-<div class="menu-section">
 <div class="section-title">监测导航</div>
-<div class="menu-items">
-<a href="#" class="menu-item active" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i><span>综合监测仪表盘</span></a>
-<a href="#" class="menu-item" onclick="showPage('slope')"><i class="fas fa-mountain"></i><span>边坡稳定性监测</span></a>
-<a href="#" class="menu-item" onclick="showPage('support')"><i class="fas fa-bolt"></i><span>支护监测</span></a>
-<a href="#" class="menu-item" onclick="showPage('gas')"><i class="fas fa-wind"></i><span>气体监测</span></a>
-<a href="#" class="menu-item" onclick="showPage('fire')"><i class="fas fa-fire"></i><span>火灾预警</span></a>
-<a href="#" class="menu-item" onclick="showPage('analysis')"><i class="fas fa-chart-bar"></i><span>数据分析</span></a>
+<a class="menu-item active" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i>综合监测仪表盘</a>
+<a class="menu-item" onclick="showPage('slope')"><i class="fas fa-mountain"></i>边坡稳定性监测</a>
+<a class="menu-item" onclick="showPage('support')"><i class="fas fa-bolt"></i>支护监测</a>
+<a class="menu-item" onclick="showPage('gas')"><i class="fas fa-wind"></i>气体监测</a>
+<a class="menu-item" onclick="showPage('fire')"><i class="fas fa-fire"></i>火灾预警</a>
+<a class="menu-item" onclick="showPage('analysis')"><i class="fas fa-chart-pie"></i>数据分析</a>
 </div>
-</div>
-</div>
-
 <div class="main-content">
-
-<!-- DASHBOARD PAGE -->
 <div id="page-dashboard" class="page-content">
 <div class="page-header"><h2 class="page-title"><i class="fas fa-satellite-dish"></i> 综合监测仪表盘</h2><p class="page-subtitle">实时监控结构安全状态 | 247个在线传感器 | 更新于 <span id="updateTime"></span></p></div>
-
-<!-- 3D Point Cloud & Pseudo-Scene -->
-<div class="dashboard-grid" style="margin-bottom:20px">
-<div class="col-6">
-<div class="card">
-<div class="card-header"><div class="card-title"><i class="fas fa-cloud"></i> 3D点云监测</div></div>
-<div class="cloud-3d" id="pointCloud">
-<div class="cloud-point" style="width:20px;height:20px;left:10%;top:20%;background:rgba(45,127,249,0.7);animation-delay:0s"></div>
-<div class="cloud-point" style="width:15px;height:15px;left:25%;top:40%;background:rgba(0,212,255,0.6);animation-delay:0.5s"></div>
-<div class="cloud-point" style="width:25px;height:25px;left:40%;top:15%;background:rgba(45,127,249,0.8);animation-delay:1s"></div>
-<div class="cloud-point" style="width:18px;height:18px;left:55%;top:35%;background:rgba(0,212,255,0.5);animation-delay:1.5s"></div>
-<div class="cloud-point" style="width:22px;height:22px;left:70%;top:25%;background:rgba(45,127,249,0.6);animation-delay:2s"></div>
-<div class="cloud-point" style="width:16px;height:16px;left:85%;top:45%;background:rgba(0,212,255,0.7);animation-delay:2.5s"></div>
-<div class="cloud-point" style="width:28px;height:28px;left:15%;top:60%;background:rgba(139,92,246,0.5);animation-delay:0.3s"></div>
-<div class="cloud-point" style="width:14px;height:14px;left:35%;top:70%;background:rgba(45,127,249,0.6);animation-delay:0.8s"></div>
-<div class="cloud-point" style="width:24px;height:24px;left:60%;top:55%;background:rgba(0,212,255,0.7);animation-delay:1.3s"></div>
-<div class="cloud-point" style="width:19px;height:19px;left:80%;top:65%;background:rgba(139,92,246,0.6);animation-delay:1.8s"></div>
-</div>
-</div>
-</div>
-<div class="col-6">
-<div class="card">
-<div class="card-header"><div class="card-title"><i class="fas fa-mountain"></i> 伪三维场景</div></div>
-<div class="pseudo-scene">
-<div class="cloud-layer">
-<div class="cloud-particle" style="width:80px;height:80px;left:10%;top:20%"></div>
-<div class="cloud-particle" style="width:100px;height:100px;left:30%;top:10%"></div>
-<div class="cloud-particle" style="width:60px;height:60px;left:50%;top:25%"></div>
-<div class="cloud-particle" style="width:90px;height:90px;left:70%;top:15%"></div>
-</div>
-<div class="mountain-peak"></div>
-<div class="terrain-line"></div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Stats Cards -->
 <div class="dashboard-grid" style="margin-bottom:20px">
 <div class="col-3"><div class="stat-card"><div class="stat-icon" style="background:linear-gradient(135deg,#00c48c,#00d4ff)"><i class="fas fa-satellite-dish"></i></div><div><div class="stat-value">247</div><div class="stat-label">在线传感器</div></div></div></div>
 <div class="col-3"><div class="stat-card"><div class="stat-icon" style="background:linear-gradient(135deg,#2d7ff9,#8b5cf6)"><i class="fas fa-project-diagram"></i></div><div><div class="stat-value">12</div><div class="stat-label">监测项目</div></div></div></div>
 <div class="col-3"><div class="stat-card"><div class="stat-icon" style="background:linear-gradient(135deg,#ffb020,#ff6b9d)"><i class="fas fa-exclamation-triangle"></i></div><div><div class="stat-value">2</div><div class="stat-label">预警次数</div></div></div></div>
 <div class="col-3"><div class="stat-card"><div class="stat-icon" style="background:linear-gradient(135deg,#00d4ff,#2d7ff9)"><i class="fas fa-brain"></i></div><div><div class="stat-value">98.5%</div><div class="stat-label">AI预测准确率</div></div></div></div>
 </div>
-
-<div class="alert-panel">
-<div class="alert-header">
-<i class="fas fa-exclamation-circle alert-icon"></i>
-<span class="alert-title">实时预警</span>
-<span class="status-badge" style="margin-left:auto;background:rgba(255,77,79,0.15);color:var(--danger)"><span class="status-dot" style="background:var(--danger)"></span> 高风险预警 (III级)</span>
-</div>
-<p style="color:var(--text-secondary);font-size:13px"><strong>时间：</strong>2026-03-18 14:25:32 &nbsp;|&nbsp; <strong>位置：</strong>智鄂尔多斯露天矿边坡A区 &nbsp;|&nbsp; <strong>内容：</strong>位移速率超阈值 (2.8mm/h > 2.0mm/h)</p>
-</div>
-
-<!-- Monitoring Cards -->
+<div class="alert-panel"><div class="alert-header"><i class="fas fa-exclamation-circle alert-icon"></i><span class="alert-title">实时预警</span><span class="status-badge" style="margin-left:auto;background:rgba(255,77,79,0.15);color:var(--danger)"><span class="status-dot" style="background:var(--danger)"></span> 高风险预警 (III级)</span></div><p style="color:var(--text-secondary);font-size:13px"><strong>时间：</strong>2026-03-19 15:30:00 &nbsp;|&nbsp; <strong>位置：</strong>鄂尔多斯露天矿边坡A区 &nbsp;|&nbsp; <strong>内容：</strong>位移速率超阈值 (2.8mm/h > 2.0mm/h)</p></div>
 <div class="dashboard-grid" style="margin-top:20px">
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-bolt"></i> 支护监测</div></div><div class="gauge-container"><div class="gauge"><div class="gauge-bg" style="background:conic-gradient(from 180deg,var(--secondary) 0deg,var(--secondary) 154deg,rgba(255,255,255,0.1) 154deg)"></div><div class="gauge-fill"><div class="gauge-value" style="color:var(--secondary)">86.4%</div><div class="gauge-label">锚杆荷载</div></div></div><div class="gauge"><div class="gauge-bg" style="background:conic-gradient(from 180deg,var(--cyber-blue) 0deg,var(--cyber-blue) 114deg,rgba(255,255,255,0.1) 114deg)"></div><div class="gauge-fill"><div class="gauge-value" style="color:var(--cyber-blue)">12.7%</div><div class="gauge-label">应力损失</div></div></div></div><div class="metric-grid"><div class="metric-item"><div class="metric-name">设计承载力</div><div class="metric-value">150kN</div></div><div class="metric-item"><div class="metric-name">状态</div><div class="metric-value status-normal">正常</div></div></div></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-mountain"></i> 边坡监测</div></div><div class="metric-grid"><div class="metric-item"><div class="metric-name">最大位移速率</div><div class="metric-value status-danger">2.8mm/h</div><div class="metric-sub">SB-08监测点</div></div><div class="metric-item"><div class="metric-name">累计沉降</div><div class="metric-value status-warning">124.5mm</div><div class="metric-sub">自监测开始</div></div></div><div class="progress-bar"><div class="progress-fill" style="width:85%;background:linear-gradient(90deg,var(--secondary),var(--warning),var(--danger))"></div></div></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-wind"></i> 气体监测</div></div><div class="metric-grid"><div class="metric-item"><div class="metric-name">CO浓度峰值</div><div class="metric-value status-normal">38ppm</div><div class="metric-sub">3#通风巷道</div></div><div class="metric-item"><div class="metric-name">O2浓度</div><div class="metric-value status-normal">20.8%</div><div class="metric-sub">正常范围</div></div></div><div class="sensor-grid" id="gasSensors"></div></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-fire"></i> 火灾预警</div></div><div class="metric-grid"><div class="metric-item"><div class="metric-name">温度异常点</div><div class="metric-value status-warning">3</div><div class="metric-sub">个监测区域</div></div><div class="metric-item"><div class="metric-name">最高温度</div><div class="metric-value status-danger">42.8°C</div><div class="metric-sub">采空区C区</div></div></div></div></div>
+<div class="col-4"><div class="monitor-card"><div class="card-icon" style="color:var(--primary)"><i class="fas fa-bolt"></i></div><h4 style="margin-bottom:8px">支护监测</h4><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--secondary);transform:rotate(210deg)"></div><div class="ring-value" style="color:var(--secondary)">86.4%</div></div><div class="metric-big">2.3%</div><div class="metric-small">智能锚杆平均荷载</div></div></div>
+<div class="col-4"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-mountain"></i></div><h4 style="margin-bottom:8px">边坡监测</h4><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(65deg)"></div><div class="ring-value" style="color:var(--warning)">18%</div></div><div class="metric-big status-warning">2.8mm/h</div><div class="metric-small">最大位移速率</div></div></div>
+<div class="col-4"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-wind"></i></div><h4 style="margin-bottom:8px">气体监测</h4><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(43deg)"></div><div class="ring-value" style="color:var(--success)">12%</div></div><div class="metric-big">38ppm</div><div class="metric-small">CO浓度峰值</div></div></div>
 </div>
-
-<!-- Charts Row -->
 <div class="dashboard-grid" style="margin-top:20px">
-<div class="col-8"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> 边坡位移趋势分析 (近30天)</div></div><div class="chart-container"><canvas id="displacementChart"></canvas></div></div></div>
-<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-pie"></i> 传感器类型分布</div></div><div class="chart-container" style="height:160px"><canvas id="sensorChart"></canvas></div></div></div>
+<div class="col-4"><div class="monitor-card"><div class="card-icon" style="color:var(--danger)"><i class="fas fa-fire"></i></div><h4 style="margin-bottom:8px">火灾预警</h4><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(9deg)"></div><div class="ring-value" style="color:var(--warning)">2.4%</div></div><div class="metric-big status-warning">42.8C</div><div class="metric-small">最高温度</div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> 边坡位移趋势</div></div><div class="chart-container"><canvas id="displacementChart"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-bar"></i> 各点位移量</div></div><div class="chart-container"><canvas id="barChart"></canvas></div></div></div>
 </div>
-
-<!-- Wave Animation & Sensor Network -->
 <div class="dashboard-grid" style="margin-top:20px">
-<div class="col-6">
-<div class="card">
-<div class="card-header"><div class="card-title"><i class="fas fa-network-wired"></i> 传感器网络状态</div></div>
-<div class="sensor-grid" id="sensorNetwork"></div>
-<div style="display:flex;justify-content:space-between;margin-top:12px;font-size:12px">
-<span><span style="display:inline-block;width:10px;height:10px;background:rgba(0,196,140,0.5);border-radius:2px;margin-right:5px"></span>在线 (240)</span>
-<span><span style="display:inline-block;width:10px;height:10px;background:rgba(255,176,32,0.5);border-radius:2px;margin-right:5px"></span>警告 (5)</span>
-<span><span style="display:inline-block;width:10px;height:10px;background:rgba(255,77,79,0.5);border-radius:2px;margin-right:5px"></span>离线 (2)</span>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-crosshairs"></i> 健康评估雷达图</div></div><div class="chart-container radar-full"><canvas id="radarChart"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-cloud"></i> 3D点云分布图</div></div><div class="cloud-3d" id="cloud3d"></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-mountain"></i> 场景伪色图</div></div><div class="pseudo-scene" id="pseudoScene"></div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-pie"></i> 传感器类型分布</div></div><div class="chart-container" style="height:200px"><canvas id="sensorChart"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-network-wired"></i> 传感器网络状态</div></div><div class="sensor-grid" id="sensorNetwork"></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-fire"></i> 位移热力图</div></div><div class="heat-map" id="heatMap"></div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-robot"></i> AI智能分析预测</div></div><div style="background:linear-gradient(135deg,rgba(45,127,249,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px"><p style="font-size:20px;font-weight:700;color:var(--warning)">未来72小时风险概率: <span style="color:var(--danger)">78%</span></p><div style="height:8px;background:rgba(255,255,255,0.1);border-radius:4px;margin-top:15px"><div style="height:100%;width:78%;background:linear-gradient(90deg,var(--secondary),var(--warning),var(--danger));border-radius:4px"></div></div></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-wave-square"></i> 实时波动曲线</div></div><div class="wave-container"><div class="wave"></div></div></div></div>
 </div>
 </div>
-</div>
-<div class="col-6">
-<div class="card">
-<div class="card-header"><div class="card-title"><i class="fas fa-water"></i> 波纹动画</div></div>
-<div class="wave-container">
-<div class="wave"></div>
-<div class="wave"></div>
-<div class="wave"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- SLOPE PAGE -->
 <div id="page-slope" class="page-content" style="display:none">
-<div class="page-header"><h2 class="page-title"><i class="fas fa-mountain"></i> 边坡稳定性监测</h2><p class="page-subtitle">实时监测边坡位移、沉降、应力变化，智能预警滑坡风险</p></div>
+<div class="page-header"><h2 class="page-title"><i class="fas fa-mountain"></i> 边坡稳定性监测</h2><p class="page-subtitle">实时监测边坡位移、沉降、应力变化</p></div>
 <div class="dashboard-grid" style="margin-bottom:20px">
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-line"></i> 最大位移速率</div></div><div class="metric-value status-danger" style="font-size:36px;text-align:center;margin:20px 0">2.8mm/h</div><p style="text-align:center;color:var(--text-muted)">位移阈值: 3.0mm/h</p></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-arrow-down"></i> 累计沉降量</div></div><div class="metric-value status-warning" style="font-size:36px;text-align:center;margin:20px 0">124.5mm</div><p style="text-align:center;color:var(--text-muted)">自监测开始</p></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-map-marker-alt"></i> 危险监测点</div></div><div class="metric-value status-danger" style="font-size:36px;text-align:center;margin:20px 0">SB-08</div><p style="text-align:center;color:var(--text-muted)">位移超限 18%</p></div></div>
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-exclamation-triangle"></i> 预警状态</div></div><div class="metric-value status-warning" style="font-size:36px;text-align:center;margin:20px 0">2</div><p style="text-align:center;color:var(--text-muted)">条预警信息</p></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--danger)"><i class="fas fa-chart-line"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--danger);transform:rotate(65deg)"></div><div class="ring-value" style="color:var(--danger)">18%</div></div><div class="metric-big status-danger">2.8mm/h</div><div class="metric-small">最大位移速率</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-arrow-down"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(15deg)"></div><div class="ring-value" style="color:var(--warning)">4.2%</div></div><div class="metric-big status-warning">124.5mm</div><div class="metric-small">累计沉降量</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--danger)"><i class="fas fa-map-marker-alt"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--danger);transform:rotate(180deg)"></div><div class="ring-value" style="color:var(--danger)">!</div></div><div class="metric-big status-danger">SB-08</div><div class="metric-small">危险监测点</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-exclamation-triangle"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(7deg)"></div><div class="ring-value" style="color:var(--warning)">2</div></div><div class="metric-big status-warning">2</div><div class="metric-small">预警状态</div></div></div>
 </div>
 <div class="dashboard-grid" style="margin-top:20px">
-<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-fire"></i> 边坡位移热力图</div></div><div class="heat-map" id="heatMap2"></div></div></div>
-<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> 30天趋势</div></div><div class="chart-container"><canvas id="slopeTrendChart"></canvas></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> 多点位移趋势曲线</div></div><div class="chart-container"><canvas id="slopeMultiChart"></canvas></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-fire"></i> 边坡位移热力图</div></div><div class="heat-map" id="slopeHeatMap"></div></div></div>
 </div>
 <div class="dashboard-grid" style="margin-top:20px">
-<div class="col-12"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-list"></i> 实时预警列表</div></div><table class="data-table"><thead><tr><th>级别</th><th>监测点</th><th>时间</th><th>内容</th><th>状态</th></tr></thead><tbody><tr><td><span style="color:var(--danger)">●高危</span></td><td>SB-08</td><td>2026-03-18 14:25:32</td><td>位移超限 18%</td><td><span style="color:var(--warning)">处理中</span></td></tr><tr><td><span style="color:var(--warning)">●警告</span></td><td>SB-05</td><td>2026-03-18 10:15:00</td><td>沉降速率偏高</td><td><span style="color:var(--success)">已处理</span></td></tr></tbody></table></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-cloud"></i> 边坡3D点云图</div></div><div class="cloud-3d" id="slopeCloud3d"></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-mountain"></i> 边坡场景伪色图</div></div><div class="pseudo-scene" id="slopeScene"></div></div></div>
 </div>
 </div>
-
-<!-- SUPPORT PAGE -->
 <div id="page-support" class="page-content" style="display:none">
 <div class="page-header"><h2 class="page-title"><i class="fas fa-bolt"></i> 支护监测</h2><p class="page-subtitle">智能锚杆、锚索应力实时监测</p></div>
 <div class="dashboard-grid" style="margin-bottom:20px">
-<div class="col-3"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-bolt"></i> 智能锚杆平均荷载</div></div><div class="gauge-container"><div class="gauge"><div class="gauge-bg" style="background:conic-gradient(from 180deg,var(--secondary) 0deg,var(--secondary) 154deg,rgba(255,255,255,0.1) 154deg)"></div><div class="gauge-fill"><div class="gauge-value" style="color:var(--secondary)">86.4%</div><div class="gauge-label">当前荷载</div></div></div></div><div class="metric-grid"><div class="metric-item"><div class="metric-name">设计承载力</div><div class="metric-value">150kN</div></div><div class="metric-item"><div class="metric-name">状态</div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-link"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(210deg)"></div><div class="ring-value" style="color:var(--success)">86%</div></div><div class="metric-big">2.3%</div><div class="metric-small">锚杆荷载比例</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--primary)"><i class="fas fa-compress-arrows-alt"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--primary);transform:rotate(46deg)"></div><div class="ring-value" style="color:var(--primary)">12.7%</div></div><div class="metric-big">0.8%</div><div class="metric-small">预应力损失</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-check-circle"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(324deg)"></div><div class="ring-value" style="color:var(--success)">90%</div></div><div class="metric-big status-normal">正常</div><div class="metric-small">支护状态</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--primary)"><i class="fas fa-database"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--primary);transform:rotate(288deg)"></div><div class="ring-value" style="color:var(--primary)">80%</div></div><div class="metric-big">150kN</div><div class="metric-small">设计承载力</div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-pie"></i> 锚杆荷载分布</div></div><div class="chart-container"><canvas id="anchorDonut"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-line"></i> 锚杆荷载时序曲线</div></div><div class="chart-container"><canvas id="anchorLine"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-bar"></i> 各锚杆受力对比</div></div><div class="chart-container"><canvas id="anchorBar"></canvas></div></div></div>
+</div>
+</div>
+<div id="page-gas" class="page-content" style="display:none">
+<div class="page-header"><h2 class="page-title"><i class="fas fa-wind"></i> 气体监测</h2><p class="page-subtitle">采空区有毒有害气体浓度实时监测</p></div>
+<div class="dashboard-grid" style="margin-bottom:20px">
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-smog"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(43deg)"></div><div class="ring-value" style="color:var(--warning)">12%</div></div><div class="metric-big status-warning">38ppm</div><div class="metric-small">CO浓度峰值</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-lungs"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(1deg)"></div><div class="ring-value" style="color:var(--success)">0.3%</div></div><div class="metric-big status-normal">20.8%</div><div class="metric-small">O2浓度</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-fire-alt"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(5deg)"></div><div class="ring-value" style="color:var(--success)">1.4%</div></div><div class="metric-big status-normal">0.28%</div><div class="metric-small">CH4浓度</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--primary)"><i class="fas fa-map-pin"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(50deg)"></div><div class="ring-value" style="color:var(--warning)">14%</div></div><div class="metric-big">3#</div><div class="metric-small">通风巷道</div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> 气体浓度趋势曲线</div></div><div class="chart-container"><canvas id="gasMultiLine"></canvas></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-cloud"></i> 气体3D分布云图</div></div><div class="cloud-3d" id="gasCloud3d"></div></div></div>
+</div>
+</div>
+<div id="page-fire" class="page-content" style="display:none">
+<div class="page-header"><h2 class="page-title"><i class="fas fa-fire"></i> 火灾预警</h2><p class="page-subtitle">采空区温度异常监测与火灾预警</p></div>
+<div class="dashboard-grid" style="margin-bottom:20px">
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-thermometer-half"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(9deg)"></div><div class="ring-value" style="color:var(--warning)">2.4%</div></div><div class="metric-big status-warning">42.8C</div><div class="metric-small">最高温度</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--danger)"><i class="fas fa-map-marker-alt"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--danger);transform:rotate(33deg)"></div><div class="ring-value" style="color:var(--danger)">1</div></div><div class="metric-big status-danger">1</div><div class="metric-small">温度异常点</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--success)"><i class="fas fa-layer-group"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--success);transform:rotate(180deg)"></div><div class="ring-value" style="color:var(--success)">3</div></div><div class="metric-big">3</div><div class="metric-small">监测区域</div></div></div>
+<div class="col-3"><div class="monitor-card"><div class="card-icon" style="color:var(--warning)"><i class="fas fa-radiation"></i></div><div class="ring-indicator"><div class="ring-fill" style="border-top-color:var(--warning);transform:rotate(50deg)"></div><div class="ring-value" style="color:var(--warning)">14%</div></div><div class="metric-big">C区</div><div class="metric-small">采空区位置</div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-line"></i> 温度变化趋势曲线</div></div><div class="chart-container"><canvas id="tempLine"></canvas></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-fire"></i> 温度分布热力图</div></div><div class="heat-map" id="fireHeatMap"></div></div></div>
+</div>
+</div>
+<div id="page-analysis" class="page-content" style="display:none">
+<div class="page-header"><h2 class="page-title"><i class="fas fa-chart-pie"></i> 数据分析</h2><p class="page-subtitle">综合数据分析与可视化</p></div>
+<div class="dashboard-grid" style="margin-bottom:20px">
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-pie"></i> 传感器类型饼图</div></div><div class="chart-container"><canvas id="analysisPie"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-radar"></i> 综合评估雷达图</div></div><div class="chart-container radar-full"><canvas id="analysisRadar"></canvas></div></div></div>
+<div class="col-4"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-chart-bar"></i> 预警统计柱状图</div></div><div class="chart-container"><canvas id="analysisBar"></canvas></div></div></div>
+</div>
+<div class="dashboard-grid" style="margin-top:20px">
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-wave-square"></i> 多参数趋势叠加曲线</div></div><div class="chart-container"><canvas id="analysisMulti"></canvas></div></div></div>
+<div class="col-6"><div class="card"><div class="card-header"><div class="card-title"><i class="fas fa-cloud"></i> 3D点云综合分析</div></div><div class="cloud-3d" id="analysisCloud3d"></div></div></div>
+</div>
+</div>
+</div>
+<script>
+document.getElementById('updateTime').textContent=new Date().toLocaleString('zh-CN');
+function showPage(id){document.querySelectorAll('.page-content').forEach(p=>p.style.display='none');document.getElementById('page-'+id).style.display='block';document.querySelectorAll('.nav-tab,.menu-item').forEach(t=>t.classList.remove('active'));event.currentTarget.classList.add('active');initCharts(id)}
+var chartsInit={};
+var co={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b9dc3'}}},scales:{x:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b9dc3'}},y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b9dc3'}}}};
+function initCharts(page){if(chartsInit[page])return;chartsInit[page]=true;
+if(page==='dashboard'){
+new Chart(document.getElementById('displacementChart').getContext('2d'),{type:'line',data:{labels:['1日','5日','10日','15日','20日','25日','30日'],datasets:[{label:'边坡A区位移(mm)',data:[2.1,2.5,2.8,3.2,3.8,4.5,5.2],borderColor:'#ff4d4f',backgroundColor:'rgba(255,77,79,0.15)',fill:true,tension:0.4},{label:'边坡B区位移(mm)',data:[1.5,1.8,2.0,2.2,2.5,2.8,3.0],borderColor:'#00c48c',backgroundColor:'rgba(0,196,140,0.15)',fill:true,tension:0.4}]},options:co});
+new Chart(document.getElementById('barChart').getContext('2d'),{type:'bar',data:{labels:['SB-01','SB-02','SB-03','SB-04','SB-05','SB-06','SB-07','SB-08'],datasets:[{label:'位移量(mm)',data:[5.2,4.8,4.5,3.8,3.2,2.8,2.5,2.1],backgroundColor:['#ff4d4f','#ff4d4f','#ffb020','#ffb020','#2d7ff9','#2d7ff9','#00c48c','#00c48c']}]},options:co});
+new Chart(document.getElementById('radarChart').getContext('2d'),{type:'radar',data:{labels:['结构安全','变形监测','应力状态','环境适应','预警精度','稳定性'],datasets:[{label:'当前状态',data:[85,78,92,88,95,82],borderColor:'#2d7ff9',backgroundColor:'rgba(45,127,249,0.2)',pointBackgroundColor:'#2d7ff9'},{label:'目标值',data:[90,85,90,90,90,85],borderColor:'#00c48c',backgroundColor:'rgba(0,196,140,0.1)',pointBackgroundColor:'#00c48c'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b9dc3'}}},scales:{r:{grid:{color:'rgba(255,255,255,0.1)'},angleLines:{color:'rgba(255,255,255,0.1)'},pointLabels:{color:'#8b9dc3'},ticks:{display:false}}}}});
+new Chart(document.getElementById('sensorChart').getContext('2d'),{type:'doughnut',data:{labels:['应变传感器','温度传感器','位移传感器','加速度传感器'],datasets:[{data:[142,58,35,12],backgroundColor:['#2d7ff9','#00c48c','#ffb020','#8b5cf6']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8b9dc3'}}}}});
+var hm=document.getElementById('heatMap');for(var i=0;i<256;i++){var c=document.createElement('div');c.className='heat-cell';var v=Math.random();c.style.background=v>0.7?'rgba(255,77,79,'+(0.4+v*0.5)+')':v>0.4?'rgba(255,176,32,'+(0.3+v*0.5)+')':'rgba(0,196,140,'+(0.3+v*0.5)+')';hm.appendChild(c)}
+var c3d=document.getElementById('cloud3d');for(var i=0;i<50;i++){var p=document.createElement('div');p.className='cloud-point';p.style.cssText='width:'+(8+Math.random()*15)+'px;height:'+(8+Math.random()*15)+'px;left:'+Math.random()*90+'%;top:'+Math.random()*80+'%;background:rgba('+(Math.random()>0.5?'0,212,255':'45,127,249')+','+(0.3+Math.random()*0.5)+')';p.style.animationDelay=Math.random()*3+'s';c3d.appendChild(p)}
+var ps=document.getElementById('pseudoScene');[[15,40],[35,30],[55,45],[75,25],[90,35]].forEach(function(p){var m=document.createElement('div');m.className='mountain-peak';m.style.cssText='width:'+p[0]+'%;height:'+p[1]+'%;left:'+(p[0]*0.5)+'%;';ps.appendChild(m)});for(var i=0;i<30;i++){var sp=document.createElement('div');sp.className='cloud-point';sp.style.cssText='width:6px;height:6px;left:'+Math.random()*90+'%;top:'+Math.random()*70+'%;background:rgba(0,212,255,'+(0.3+Math.random()*0.5)+')';sp.style.animationDelay=Math.random()*2+'s';ps.appendChild(sp)}
+var sn=document.getElementById('sensorNetwork');for(var i=0;i<256;i++){var s=document.createElement('div');s.className='sensor'+(i<5?' warning':i<7?' danger':'');sn.appendChild(s)}
+}
+if(page==='slope'){
+new Chart(document.getElementById('slopeMultiChart').getContext('2d'),{type:'line',data:{labels:['0:00','4:00','8:00','12:00','16:00','20:00','24:00'],datasets:[{label:'SB-01',data:[1.2,1.5,1.8,2.1,2.4,2.7,2.8],borderColor:'#ff4d4f',tension:0.4},{label:'SB-02',data:[0.8,1.0,1.2,1.4,1.6,1.8,2.0],borderColor:'#ffb020',tension:0.4},{label:'SB-03',data:[0.5,0.6,0.7,0.8,0.9,1.0,1.1],borderColor:'#00c48c',tension:0.4}]},options:co});
+var shm=document.getElementById('slopeHeatMap');for(var i=0;i<256;i++){var c=document.createElement('div');c.className='heat-cell';var v=Math.random();c.style.background=v>0.7?'rgba(255,77,79,'+(0.4+v*0.5)+')':v>0.4?'rgba(255,176,32,'+(0.3+v*0.5)+')':'rgba(0,196,140,'+(0.3+v*0.5)+')';shm.appendChild(c)}
+var sc3d=document.getElementById('slopeCloud3d');for(var i=0;i<50;i++){var p=document.createElement('div');p.className='cloud-point';p.style.cssText='width:'+(8+Math.random()*15)+'px;height:'+(8+Math.random()*15)+'px;left:'+Math.random()*90+'%;top:'+Math.random()*80+'%;background:rgba('+(Math.random()>0.5?'0,212,255':'45,127,249')+','+(0.3+Math.random()*0.5)+')';p.style.animationDelay=Math.random()*3+'s';sc3d.appendChild(p)}
+var sps=document.getElementById('slopeScene');[[15,40],[35,30],[55,45],[75,25],[90,35]].forEach(function(p){var m=document.createElement('div');m.className='mountain-peak';m.style.cssText='width:'+p[0]+'%;height:'+p[1]+'%;left:'+(p[0]*0.5)+'%;';sps.appendChild(m)});
+}
+if(page==='support'){
+new Chart(document.getElementById('anchorDonut').getContext('2d'),{type:'doughnut',data:{labels:['正常荷载','预警荷载','超载'],datasets:[{data:[85,12,3],backgroundColor:['#00c48c','#ffb020','#ff4d4f']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#8b9dc3'}}}}});
+new Chart(document.getElementById('anchorLine').getContext('2d'),{type:'line',data:{labels:['1日','5日','10日','15日','20日','25日','30日'],datasets:[{label:'锚杆荷载(kN)',data:[120,125,128,132,135,138,142],borderColor:'#2d7ff9',backgroundColor:'rgba(45,127,249,0.15)',fill:true,tension:0.4}]},options:co});
+new Chart(document.getElementById('anchorBar').getContext('2d'),{type:'bar',data:{labels:['AG-01','AG-02','AG-03','AG-04','AG-05','AG-06'],datasets:[{label:'当前荷载(kN)',data:[142,138,125,132,128,135],backgroundColor:'#2d7ff9'},{label:'设计荷载(kN)',data:[150,150,150,150,150,150],backgroundColor:'rgba(255,255,255,0.1)'}]},options:co});
+}
+if(page==='gas'){
+new Chart(document.getElementById('gasMultiLine').getContext('2d'),{type:'line',data:{labels:['0:00','4:00','8:00','12:00','16:00','20:00','24:00'],datasets:[{label:'CO(ppm)',data:[25,28,32,38,35,30,28],borderColor:'#ffb020',tension:0.4},{label:'O2(%)',data:[20.9,20.8,20.8,20.7,20.8,20.9,20.8],borderColor:'#00c48c',tension:0.4},{label:'CH4(%)',data:[0.2,0.25,0.28,0.3,0.28,0.25,0.22],borderColor:'#2d7ff9',tension:0.4}]},options:co});
+var gc3d=document.getElementById('gasCloud3d');for(var i=0;i<50;i++){var p=document.createElement('div');p.className='cloud-point';p.style.cssText='width:'+(8+Math.random()*15)+'px;height:'+(8+Math.random()*15)+'px;left:'+Math.random()*90+'%;top:'+Math.random()*80+'%;background:rgba('+(Math.random()>0.5?'255,176,32':'139,92,246')+','+(0.3+Math.random()*0.5)+')';p.style.animationDelay=Math.random()*3+'s';gc3d.appendChild(p)}
+}
+if(page==='fire'){
+new Chart(document.getElementById('tempLine').getContext('2d'),{type:'line',data:{labels:['0:00','4:00','8:00','12:00','16:00','20:00','24:00'],datasets:[{label:'温度(C)',data:[28,30,35,42,38,32,30],borderColor:'#ff4d4f',backgroundColor:'rgba(255,77,79,0.15)',fill:true,tension:0.4}]},options:co});
+var fhm=document.getElementById('fireHeatMap');for(var i=0;i<256;i++){var c=document.createElement('div');c.className='heat-cell';var v=Math.random();c.style.background=v>0.7?'rgba(255,77,79,'+(0.4+v*0.5)+')':v>0.4?'rgba(255,176,32,'+(0.3+v*0.5)+')':'rgba(255,143,0,'+(0.3+v*0.5)+')';fhm.appendChild(c)}}
+if(page==='analysis'){
+new Chart(document.getElementById('analysisPie').getContext('2d'),{type:'pie',data:{labels:['位移传感器','应力传感器','温度传感器','气体传感器'],datasets:[{data:[85,62,48,32],backgroundColor:['#2d7ff9','#00c48c','#ffb020','#8b5cf6']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#8b9dc3'}}}}});
+new Chart(document.getElementById('analysisRadar').getContext('2d'),{type:'radar',data:{labels:['安全性','稳定性','经济性','可靠性','可维护性','环保性'],datasets:[{label:'综合评分',data:[88,82,75,90,78,85],borderColor:'#2d7ff9',backgroundColor:'rgba(45,127,249,0.2)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b9dc3'}}},scales:{r:{grid:{color:'rgba(255,255,255,0.1)'},angleLines:{color:'rgba(255,255,255,0.1)'},pointLabels:{color:'#8b9dc3'},ticks:{display:false}}}}});
+new Chart(document.getElementById('analysisBar').getContext('2d'),{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月'],datasets:[{label:'高危预警',data:[2,3,1,4,2,1],backgroundColor:'#ff4d4f'},{label:'中危预警',data:[5,4,6,3,4,2],backgroundColor:'#ffb020'},{label:'低危预警',data:[8,6,5,7,6,4],backgroundColor:'#2d7ff9'}]},options:co});
+new Chart(document.getElementById('analysisMulti').getContext('2d'),{type:'line',data:{labels:['1日','5日','10日','15日','20日','25日','30日'],datasets:[{label:'位移(mm)',data:[2.1,2.5,2.8,3.2,3.8,4.5,5.2],borderColor:'#ff4d4f',tension:0.4},{label:'应力(MPa)',data:[12,14,15,17,19,22,25],borderColor:'#2d7ff9',tension:0.4},{label:'温度(C)',data:[25,27,30,32,35,33,31],borderColor:'#ffb020',tension:0.4}]},options:co});
+var ac3d=document.getElementById('analysisCloud3d');for(var i=0;i<50;i++){var p=document.createElement('div');p.className='cloud-point';p.style.cssText='width:'+(8+Math.random()*15)+'px;height:'+(8+Math.random()*15)+'px;left:'+Math.random()*90+'%;top:'+Math.random()*80+'%;background:rgba('+(Math.random()>0.5?'0,212,255':'139,92,246')+','+(0.3+Math.random()*0.5)+')';p.style.animationDelay=Math.random()*3+'s';ac3d.appendChild(p)}
+}}}
+initCharts('dashboard');
+</script>
+</body>
+</html>
